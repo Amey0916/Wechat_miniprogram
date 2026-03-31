@@ -27,34 +27,73 @@ Page({
   },
 
   _sendWs(data) {
-    try {
-      const s = wx.connectSocket({ url: app.globalData.serverWsUrl, timeout: 2000 })
-      s.onOpen(() => { s.send({ data: JSON.stringify(data) }); s.close() })
-    } catch(e) { console.warn(e) }
+    return new Promise((resolve, reject) => {
+      try {
+        const s = wx.connectSocket({ url: app.globalData.serverWsUrl, timeout: 2000 })
+        let done = false
+        const finish = (ok, payload) => {
+          if (done) return
+          done = true
+          try { s.close() } catch (_) {}
+          ok ? resolve(payload) : reject(payload)
+        }
+        s.onOpen(() => {
+          s.send({
+            data: JSON.stringify(data),
+            fail: (err) => finish(false, new Error(err?.errMsg || '发送失败'))
+          })
+        })
+        s.onMessage((msg) => {
+          try {
+            const resp = JSON.parse(msg.data || '{}')
+            if (resp.ok) finish(true, resp)
+            else finish(false, new Error(resp.error || '后端执行失败'))
+          } catch (_) {
+            finish(true, {})
+          }
+        })
+        s.onError((err) => finish(false, new Error(err?.errMsg || '连接失败')))
+      } catch (e) {
+        reject(e)
+      }
+    })
   },
 
-  toggleNav() {
+  async toggleNav() {
     const next = !this.data.navActive
-    this.setData({ navActive: next, rvizVisible: next })
-    this._sendWs({ type: 'launch', action: next ? 'start_nav' : 'stop_nav' })
-    if (next) wx.showToast({ title: '正在启动导航…', icon: 'none' })
+    try {
+      await this._sendWs({ type: 'launch', payload: { action: next ? 'start_nav' : 'stop_nav' } })
+      this.setData({ navActive: next, rvizVisible: next })
+      wx.showToast({ title: next ? '正在启动导航…' : '导航已关闭', icon: 'none' })
+    } catch (e) {
+      wx.showToast({ title: `导航操作失败：${e.message || '未知错误'}`, icon: 'none', duration: 2600 })
+    }
   },
 
-  toggleFollow() {
+  async toggleFollow() {
     const next = !this.data.followActive
-    this.setData({ followActive: next })
     if (next) {
-      // 在新终端启动自定义功能节点
-      this._sendWs({
-        type: 'cmd',
-        action: 'shell_new_term',
-        command: 'source install/setup.bash && ros2 launch my_robot_apps open_function.launch.py'
-      })
-      wx.showToast({ title: '正在启动功能…', icon: 'none' })
+      try {
+        // 启动跟随功能（与后端 launch 映射一致）
+        await this._sendWs({ type: 'launch', payload: { action: 'start_follow' } })
+        this.setData({ followActive: true })
+        wx.showToast({ title: '正在启动功能…', icon: 'none' })
+      } catch (e) {
+        this.setData({ followActive: false })
+        wx.showToast({
+          title: `开启失败：${e.message || '请检查工控机依赖'}`,
+          icon: 'none',
+          duration: 2800
+        })
+      }
     } else {
-      // 停止功能：发送停止信号（如有对应 launch 可改为 stop_follow）
-      this._sendWs({ type: 'launch', action: 'stop_follow' })
-      wx.showToast({ title: '功能已关闭', icon: 'none' })
+      try {
+        await this._sendWs({ type: 'launch', payload: { action: 'stop_follow' } })
+        this.setData({ followActive: false })
+        wx.showToast({ title: '功能已关闭', icon: 'none' })
+      } catch (e) {
+        wx.showToast({ title: `关闭失败：${e.message || '未知错误'}`, icon: 'none', duration: 2600 })
+      }
     }
   },
 
@@ -63,24 +102,29 @@ Page({
     wx.navigateTo({ url: '/pages/chassis/chassis' })
   },
 
-  toggleUnlock() {
+  async toggleUnlock() {
     const next = !this.data.unlocked
-    this.setData({ unlocked: next })
-    this._sendWs({ type: 'io', payload: {
-      io_cmd_enable: true, io_cmd_lamp_ctrl: true, io_cmd_unlock: next
-    }})
+    try {
+      await this._sendWs({ type: 'io', payload: {
+        io_cmd_enable: true, io_cmd_lamp_ctrl: true, io_cmd_unlock: next
+      }})
+      this.setData({ unlocked: next })
+    } catch (e) {
+      wx.showToast({ title: `解锁失败：${e.message || '未知错误'}`, icon: 'none', duration: 2600 })
+      return
+    }
     if (next) {
       if (!this._ioTimer) {
         this._ioTimer = setInterval(() => {
           this._sendWs({ type: 'io', payload: {
             io_cmd_enable: true, io_cmd_lamp_ctrl: true, io_cmd_unlock: true
-          }})
+          }}).catch(() => {})
         }, 100)
       }
-      this._sendWs({ type: 'control', payload: { gear: 6, linear_x: 0, linear_y: 0, angular_z: 0 }})
+      this._sendWs({ type: 'control', payload: { gear: 6, linear_x: 0, linear_y: 0, angular_z: 0 }}).catch(() => {})
     } else {
       if (this._ioTimer) { clearInterval(this._ioTimer); this._ioTimer = null }
-      this._sendWs({ type: 'control', payload: { gear: 6, linear_x: 0, linear_y: 0, angular_z: 0 }})
+      this._sendWs({ type: 'control', payload: { gear: 6, linear_x: 0, linear_y: 0, angular_z: 0 }}).catch(() => {})
     }
   },
 

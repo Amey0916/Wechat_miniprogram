@@ -28,23 +28,23 @@
 .unlock-icon { font-size: 44rpx; }
 .unlock-text-wrap { flex: 1; }
 .unlock-label { display: block; font-size: 30rpx; font-weight: 600; color: var(--text); margin-bottom: 6rpx; }
-.unlock-hint  { display: block; font-size: 22rpx; color: var(--text2); }
+.unlock-hint  { display: block; font-size: 26rpx; color: var(--text2); }
 .unlock-pill  { padding: 8rpx 24rpx; border-radius: 40rpx; font-size: 22rpx; font-weight: 700; letter-spacing: 2rpx; }
 .pill-on  { background: rgba(0,230,118,0.15); color: var(--green); border: 1rpx solid var(--green); }
 .pill-off { background: rgba(255,59,92,0.12);  color: var(--red);   border: 1rpx solid var(--red); }
 
 /* 速度卡片 */
 .speed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28rpx; }
-.speed-label  { font-size: 26rpx; color: var(--text2); letter-spacing: 1rpx; }
+.speed-label  { font-size: 30rpx; color: var(--text2); letter-spacing: 1rpx; }
 .speed-val-box { display: flex; align-items: baseline; gap: 6rpx; }
 .speed-val {
   font-size: 48rpx; font-weight: 700; color: var(--accent);
   font-variant-numeric: tabular-nums;
   text-shadow: 0 0 20rpx rgba(0,229,255,0.5);
 }
-.speed-unit { font-size: 22rpx; color: var(--text2); }
+.speed-unit { font-size: 26rpx; color: var(--text2); }
 .slider-track-wrap { display: flex; align-items: center; gap: 16rpx; }
-.slider-min, .slider-max { font-size: 22rpx; color: var(--text2); flex-shrink: 0; width: 56rpx; }
+.slider-min, .slider-max { font-size: 26rpx; color: var(--text2); flex-shrink: 0; width: 56rpx; }
 .slider-max { text-align: right; }
 .speed-slider { flex: 1; margin: 0; }
 

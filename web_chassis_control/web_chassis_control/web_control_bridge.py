@@ -175,8 +175,7 @@ class WebControlBridgeNode(Node):
             command = builtin.get(action, '')
 
         if not command:
-            self.get_logger().warning(f'[cmd] empty command for action: {action}')
-            return
+            raise ValueError(f'empty command for action: {action}')
 
         if action == 'shell_new_term':
             def _run_new_term():
@@ -270,8 +269,7 @@ class WebControlBridgeNode(Node):
 
         cmd = self._launch_map.get(action)
         if cmd is None:
-            self.get_logger().warning(f'[launch] unknown action: {action}')
-            return
+            raise ValueError(f'unknown launch action: {action}')
 
         # 如果已经在运行，不重复启动
         existing = self._procs.get(action)
