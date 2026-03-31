@@ -52,8 +52,8 @@ const I18N = {
     chassis_title: '底盘控制',
     chassis_unlocked: '底盘已解锁', chassis_locked: '底盘已锁定',
     chassis_unlock_hint_on: '点击锁定底盘', chassis_unlock_hint_off: '点击解锁底盘',
-    chassis_speed_label: '前进 / 后退速度',
-    chassis_horn: '鸣笛', chassis_lamp_on: '灯光开', chassis_lamp_off: '灯光关',
+    chassis_speed_label: '行进速度',
+    chassis_horn: '鸣笛', chassis_lamp_on: '灯光开启', chassis_lamp_off: '灯光关闭',
     chassis_back: '返回上一界面',
   },
   'zh-tw': {
@@ -98,8 +98,8 @@ const I18N = {
     chassis_title: '底盤控制',
     chassis_unlocked: '底盤已解鎖', chassis_locked: '底盤已鎖定',
     chassis_unlock_hint_on: '點擊鎖定底盤', chassis_unlock_hint_off: '點擊解鎖底盤',
-    chassis_speed_label: '前進 / 後退速度',
-    chassis_horn: '鳴笛', chassis_lamp_on: '燈光開', chassis_lamp_off: '燈光關',
+    chassis_speed_label: '行進速度',
+    chassis_horn: '鳴笛', chassis_lamp_on: '燈光開啟', chassis_lamp_off: '燈光關閉',
     chassis_back: '返回上一介面',
   },
   'en': {
@@ -144,7 +144,7 @@ const I18N = {
     chassis_title: 'Chassis Control',
     chassis_unlocked: 'Chassis Unlocked', chassis_locked: 'Chassis Locked',
     chassis_unlock_hint_on: 'Tap to lock', chassis_unlock_hint_off: 'Tap to unlock',
-    chassis_speed_label: 'Forward / Backward Speed',
+    chassis_speed_label: 'Move Speed',
     chassis_horn: 'Horn', chassis_lamp_on: 'Light ON', chassis_lamp_off: 'Light OFF',
     chassis_back: 'Back',
   }

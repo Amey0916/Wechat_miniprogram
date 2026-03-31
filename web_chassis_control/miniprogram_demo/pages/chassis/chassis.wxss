@@ -76,6 +76,10 @@
   border-color: var(--accent) !important;
   box-shadow: 0 0 24rpx rgba(0,229,255,0.2) !important;
 }
+.dpad-btn-pressed .dpad-arrow {
+  color: var(--text) !important;
+  text-shadow: 0 0 12rpx rgba(0,229,255,0.55) !important;
+}
 .dpad-up    { border-radius: 24rpx 24rpx 0 0; }
 .dpad-down  { border-radius: 0 0 24rpx 24rpx; }
 .dpad-left  { border-radius: 24rpx 0 0 24rpx; }
