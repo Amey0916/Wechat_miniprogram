@@ -105,10 +105,11 @@ ros2 launch web_chassis_control web_chassis_control.launch.py chassis_type:=FW h
 ```
 
 3. 小程序 `app.js` 设置 `serverWsUrl` 为 `ws://<工控机IP>:8899`。
+   - 可选：设置本地存储 `rvizWebUrl`（默认自动推导为 `http://<工控机IP>:8080/`），用于“扫图/智慧控制”页面内嵌 RViz Web 页面。
 
 4. 手机与工控机连同一网络，打开小程序：
-   - 进入“智慧控制”点击“开启功能”
-   - 期望结果：出现“正在启动功能…”；若失败会出现明确错误 toast
+    - 进入“智慧控制”点击“开启功能”
+   - 期望结果：出现“正在启动功能…”；若 `follow.launch.py` 不存在或启动后立即退出，会直接返回错误 toast
 
 5. 在工控机观察桥接日志：
    - 应看到 launch 动作 `start_follow` 被接收

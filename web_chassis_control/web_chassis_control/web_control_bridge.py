@@ -1,5 +1,6 @@
 import asyncio
 import json
+import time
 import subprocess
 import threading
 from typing import Any, Dict, Optional
@@ -21,6 +22,9 @@ CHASSIS_TYPE_MAP = {
 MAX_REQUEST_SIZE = 4096
 MAX_BRAKE_PERCENTAGE = 100.0
 MAX_TURN_LAMP = 2
+LAUNCH_STARTUP_CHECK_TIMEOUT_SEC = 1.0
+LAUNCH_STARTUP_CHECK_INTERVAL_SEC = 0.05
+MAX_ERROR_OUTPUT_BYTES = 500
 
 
 def _bool_value(value: Any, default: bool = False) -> bool:
@@ -277,24 +281,46 @@ class WebControlBridgeNode(Node):
             self.get_logger().info(f'[launch] {action} already running (pid={existing.pid})')
             return
 
-        def _run():
+        # 同步早退检测：避免“按钮显示成功但 launch 立即失败”
+        try:
+            self.get_logger().info(f'[launch] starting: {" ".join(cmd)}')
+            proc = subprocess.Popen(
+                cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True
+            )
+            self._procs[action] = proc
+            deadline = time.time() + LAUNCH_STARTUP_CHECK_TIMEOUT_SEC
+            rc = proc.poll()
+            while rc is None and time.time() < deadline:
+                time.sleep(LAUNCH_STARTUP_CHECK_INTERVAL_SEC)
+                rc = proc.poll()
+            if rc is not None:
+                tail = ''
+                try:
+                    if proc.stdout:
+                        tail = proc.stdout.read(MAX_ERROR_OUTPUT_BYTES)
+                except Exception:
+                    tail = ''
+                self._procs[action] = None
+                raise RuntimeError(f'launch {action} exited early with code {rc}. {tail}'.strip())
+            self.get_logger().info(f'[launch] {action} started (pid={proc.pid})')
+        except Exception as exc:
+            self.get_logger().error(f'[launch] failed to start {action}: {exc}')
+            raise ValueError(str(exc))
+
+        def _wait_exit():
             try:
-                self.get_logger().info(f'[launch] starting: {" ".join(cmd)}')
-                proc = subprocess.Popen(
-                    cmd,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    text=True
-                )
-                self._procs[action] = proc
-                self.get_logger().info(f'[launch] {action} started (pid={proc.pid})')
-                # 等待进程结束，记录退出码
                 rc = proc.wait()
                 self.get_logger().info(f'[launch] {action} exited with code {rc}')
             except Exception as exc:
-                self.get_logger().error(f'[launch] failed to start {action}: {exc}')
+                self.get_logger().warning(f'[launch] wait failed for {action}: {exc}')
+            finally:
+                if self._procs.get(action) is proc:
+                    self._procs[action] = None
 
-        threading.Thread(target=_run, daemon=True).start()
+        threading.Thread(target=_wait_exit, daemon=True).start()
 
     def publish_ctrl(self, payload: Dict[str, Any]) -> None:
         msg = WebCtrlCmd()

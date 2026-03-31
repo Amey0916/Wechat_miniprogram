@@ -1,4 +1,14 @@
 const legacyHttpUrl = wx.getStorageSync('serverBaseUrl')
+const DEFAULT_RVIZ_WEB_PORT = 8080
+
+function deriveRvizWebUrl(wsUrl) {
+  const input = String(wsUrl || '').trim()
+  const m = input.match(/^(wss?):\/\/([^/:]+)(?::\d+)?/i)
+  if (!m) return ''
+  const proto = m[1].toLowerCase() === 'wss' ? 'https' : 'http'
+  const host = m[2]
+  return `${proto}://${host}:${DEFAULT_RVIZ_WEB_PORT}/`
+}
 
 // ── 多语言文本字典 ────────────────────────────────────────────────────────────
 const I18N = {
@@ -153,6 +163,7 @@ const I18N = {
 App({
   globalData: {
     serverWsUrl: wx.getStorageSync('serverWsUrl') || (legacyHttpUrl ? legacyHttpUrl.replace(/^http/, 'ws') : 'ws://192.168.1.102:8899'),
+    rvizWebUrl: wx.getStorageSync('rvizWebUrl') || deriveRvizWebUrl(wx.getStorageSync('serverWsUrl') || (legacyHttpUrl ? legacyHttpUrl.replace(/^http/, 'ws') : 'ws://192.168.1.102:8899')),
     theme:    wx.getStorageSync('theme')    || 'dark',
     lang:     wx.getStorageSync('lang')     || 'zh-cn',
     fontSize: wx.getStorageSync('fontSize') || 'normal',

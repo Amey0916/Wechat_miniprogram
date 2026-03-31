@@ -37,6 +37,10 @@
 .rviz-placeholder {
   display: flex; flex-direction: column; align-items: center; gap: 16rpx;
 }
+.rviz-web {
+  width: 100%;
+  height: 100%;
+}
 .rviz-icon { font-size: 80rpx; opacity: 0.3; }
 .rviz-hint { font-size: 24rpx; color: var(--text3); }
 .fullscreen-btn {

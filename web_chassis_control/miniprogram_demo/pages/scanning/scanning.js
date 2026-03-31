@@ -17,7 +17,8 @@ Page({
   data: {
     theme: 'dark', fontSize: 'normal', t: {},
     fullscreen: false, unlocked: false,
-    showSaveModal: false, speed: 0.4, speedPct: 40
+    showSaveModal: false, speed: 0.4, speedPct: 40,
+    rvizWebUrl: ''
   },
 
   onLoad() {
@@ -49,7 +50,12 @@ Page({
 
   _refresh() {
     const { lang, fontSize } = app.globalData
-    this.setData({ theme: app.resolvedTheme(), fontSize, t: app.t(lang) })
+    this.setData({
+      theme: app.resolvedTheme(),
+      fontSize,
+      t: app.t(lang),
+      rvizWebUrl: app.globalData.rvizWebUrl || ''
+    })
   },
 
   goSettings() {

@@ -4,7 +4,8 @@
     <view class="header-settings" bindtap="goSettings">⚙️</view>
   </view>
   <view class="rviz-wrap {{fullscreen ? 'rviz-full' : ''}}">
-    <view class="rviz-placeholder">
+    <web-view class="rviz-web" src="{{rvizWebUrl}}" wx:if="{{rvizWebUrl}}"></web-view>
+    <view class="rviz-placeholder" wx:else>
       <text class="rviz-icon">📡</text>
       <text class="rviz-hint txt">{{t.scan_rviz_hint}}</text>
     </view>
