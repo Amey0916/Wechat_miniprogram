@@ -1,0 +1,44 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}}">
+
+  <view class="header">
+    <text class="header-title txt">{{t.map_title}}</text>
+    <view class="header-actions">
+      <view class="header-btn {{managing ? 'header-btn-active' : ''}}" bindtap="toggleManage">
+        <text class="txt">{{managing ? t.map_done : t.map_manage}}</text>
+      </view>
+      <view class="header-settings" bindtap="goSettings">⚙️</view>
+    </view>
+  </view>
+
+  <view class="map-grid">
+    <view wx:for="{{maps}}" wx:key="index" class="map-item" data-idx="{{index}}" bindtap="onMapTap">
+      <view class="map-thumb">
+        <image src="{{item.thumb}}" mode="aspectFill" class="map-img" wx:if="{{item.thumb}}"/>
+        <view class="map-placeholder" wx:else><text class="map-placeholder-icon">🗺️</text></view>
+        <view wx:if="{{managing}}" class="delete-btn" data-idx="{{index}}" catchtap="onDeleteMap"><text>✕</text></view>
+      </view>
+      <view class="map-name-row" data-idx="{{index}}" catchtap="onEditName">
+        <text class="map-name txt">{{item.name}}</text>
+        <text class="edit-icon">✏️</text>
+      </view>
+    </view>
+
+    <view class="map-item" bindtap="onAddMap">
+      <view class="map-thumb map-add-thumb"><text class="map-add-icon">＋</text></view>
+      <text class="map-name txt">{{t.map_add}}</text>
+    </view>
+  </view>
+
+  <view class="modal-mask" wx:if="{{editingIdx >= 0}}" bindtap="onNameCancel">
+    <view class="modal-box" catchtap="">
+      <text class="modal-title txt">{{t.map_edit_title}}</text>
+      <input class="modal-input txt" value="{{editingName}}" bindinput="onNameInput"
+        placeholder="{{t.map_edit_placeholder}}" placeholder-style="color: var(--text3)" focus/>
+      <view class="modal-btns">
+        <view class="modal-btn modal-cancel txt" bindtap="onNameCancel">{{t.map_cancel}}</view>
+        <view class="modal-btn modal-confirm txt" bindtap="onNameConfirm">{{t.map_confirm}}</view>
+      </view>
+    </view>
+  </view>
+
+</view>

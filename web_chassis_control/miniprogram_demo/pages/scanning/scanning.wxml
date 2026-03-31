@@ -1,0 +1,76 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}} {{fullscreen ? 'fullscreen' : ''}}">
+  <view class="header" wx:if="{{!fullscreen}}">
+    <text class="header-title txt">{{t.scan_title}}</text>
+    <view class="header-settings" bindtap="goSettings">⚙️</view>
+  </view>
+  <view class="rviz-wrap {{fullscreen ? 'rviz-full' : ''}}">
+    <view class="rviz-placeholder">
+      <text class="rviz-icon">📡</text>
+      <text class="rviz-hint txt">{{t.scan_rviz_hint}}</text>
+    </view>
+    <view class="fullscreen-btn" bindtap="toggleFullscreen"><text>{{fullscreen ? '⊡' : '⛶'}}</text></view>
+  </view>
+  <view class="controls-wrap" wx:if="{{!fullscreen}}">
+    <view class="ctrl-row">
+      <view class="side-btn" bindtap="goHome">
+        <text class="side-icon">🏠</text>
+        <text class="side-label txt">{{t.scan_go_home}}</text>
+      </view>
+      <view class="dpad-wrap">
+        <view class="dpad-row">
+          <view class="dpad-btn dpad-up" data-dir="up"
+            catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+            bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave">
+            <text class="dpad-arrow">▲</text></view>
+        </view>
+        <view class="dpad-row">
+          <view class="dpad-btn dpad-left" data-dir="left"
+            catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+            bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave">
+            <text class="dpad-arrow">◀</text></view>
+          <view class="dpad-center"><view class="dpad-center-ring"></view></view>
+          <view class="dpad-btn dpad-right" data-dir="right"
+            catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+            bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave">
+            <text class="dpad-arrow">▶</text></view>
+        </view>
+        <view class="dpad-row">
+          <view class="dpad-btn dpad-down" data-dir="down"
+            catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+            bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave">
+            <text class="dpad-arrow">▼</text></view>
+        </view>
+      </view>
+      <view class="side-btn side-btn-accent" bindtap="showSaveModal">
+        <text class="side-icon">💾</text>
+        <text class="side-label txt">{{t.scan_save}}</text>
+      </view>
+    </view>
+    <view class="bottom-row">
+      <view class="bottom-btn {{unlocked ? 'btn-unlocked' : 'btn-locked'}}" bindtap="toggleUnlock">
+        <text class="txt">{{unlocked ? t.scan_unlock : t.scan_locked}}</text>
+      </view>
+      <view class="bottom-btn" bindtap="goChassis">
+        <text class="txt">{{t.scan_chassis}}</text>
+      </view>
+    </view>
+    <view class="back-row" bindtap="goBack">
+      <text class="back-icon">←</text>
+      <text class="back-text txt">{{t.scan_back}}</text>
+    </view>
+  </view>
+  <view class="modal-mask" wx:if="{{showSaveModal}}" bindtap="hideSaveModal">
+    <view class="modal-box" catchtap="">
+      <text class="modal-title txt">{{t.scan_modal_title}}</text>
+      <view class="modal-warn">
+        <text class="modal-warn-icon">⚠️</text>
+        <text class="modal-warn-text txt">{{t.scan_modal_warn}}</text>
+      </view>
+      <text class="modal-hint txt">{{t.scan_modal_hint}}</text>
+      <view class="modal-btns">
+        <view class="modal-btn modal-cancel txt" bindtap="hideSaveModal">{{t.scan_modal_back}}</view>
+        <view class="modal-btn modal-confirm txt" bindtap="confirmSave">{{t.scan_modal_confirm}}</view>
+      </view>
+    </view>
+  </view>
+</view>

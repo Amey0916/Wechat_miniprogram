@@ -1,0 +1,66 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}}">
+
+  <view class="header">
+    <text class="header-title txt">{{t.settings}}</text>
+  </view>
+
+  <!-- 色调 -->
+  <view class="card">
+    <text class="section-label txt">{{t.set_theme}}</text>
+    <view class="option-row">
+      <view class="option-btn {{theme === 'dark' ? 'option-active' : ''}}" data-value="dark" bindtap="setTheme">
+        <text class="option-icon">🌙</text>
+        <text class="option-text txt">{{t.set_dark}}</text>
+      </view>
+      <view class="option-btn {{theme === 'light' ? 'option-active' : ''}}" data-value="light" bindtap="setTheme">
+        <text class="option-icon">☀️</text>
+        <text class="option-text txt">{{t.set_light}}</text>
+      </view>
+      <view class="option-btn {{theme === 'auto' ? 'option-active' : ''}}" data-value="auto" bindtap="setTheme">
+        <text class="option-icon">🔄</text>
+        <text class="option-text txt">{{t.set_auto}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 语言 -->
+  <view class="card">
+    <text class="section-label txt">{{t.set_lang}}</text>
+    <view class="option-col">
+      <view class="option-row-item {{lang === 'zh-cn' ? 'option-active' : ''}}" data-value="zh-cn" bindtap="setLang">
+        <text class="option-text txt">简体中文</text>
+        <view class="check-dot {{lang === 'zh-cn' ? 'dot-on' : 'dot-off'}} dot"></view>
+      </view>
+      <view class="option-row-item {{lang === 'zh-tw' ? 'option-active' : ''}}" data-value="zh-tw" bindtap="setLang">
+        <text class="option-text txt">繁體中文</text>
+        <view class="check-dot {{lang === 'zh-tw' ? 'dot-on' : 'dot-off'}} dot"></view>
+      </view>
+      <view class="option-row-item {{lang === 'en' ? 'option-active' : ''}}" data-value="en" bindtap="setLang">
+        <text class="option-text txt">English</text>
+        <view class="check-dot {{lang === 'en' ? 'dot-on' : 'dot-off'}} dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 字体大小 -->
+  <view class="card">
+    <text class="section-label txt">{{t.set_font}}</text>
+    <view class="option-row">
+      <view class="option-btn {{fontSize === 'normal' ? 'option-active' : ''}}" data-value="normal" bindtap="setFontSize">
+        <text class="option-icon sz-demo-normal">A</text>
+        <text class="option-text txt">{{t.set_normal}}</text>
+      </view>
+      <view class="option-btn {{fontSize === 'large' ? 'option-active' : ''}}" data-value="large" bindtap="setFontSize">
+        <text class="option-icon sz-demo-large">A</text>
+        <text class="option-text txt">{{t.set_large}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 返回 -->
+  <view class="back-btn" bindtap="goBack">
+    <text class="back-icon">←</text>
+    <text class="back-text txt">{{t.back}}</text>
+  </view>
+
+</view>

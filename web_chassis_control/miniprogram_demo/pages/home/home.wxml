@@ -1,0 +1,32 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}}">
+
+  <view class="settings-entry" bindtap="goSettings">
+    <text class="settings-icon">⚙️</text>
+  </view>
+
+  <view class="home-body">
+    <view class="brand-wrap">
+      <view class="brand-glow"></view>
+      <text class="brand-sub">{{t.home_sub}}</text>
+      <text class="brand-title txt">{{t.home_title1}}</text>
+      <text class="brand-title brand-title2 txt">{{t.home_title2}}</text>
+      <view class="brand-line"></view>
+      <text class="brand-tagline txt">{{t.home_tagline}}</text>
+    </view>
+
+    <view class="launch-btn-wrap">
+      <view class="launch-btn {{launching ? 'launching' : ''}}" bindtap="onLaunch">
+        <view class="launch-btn-border"></view>
+        <view class="launch-btn-inner">
+          <text class="launch-icon">{{launched ? '✓' : launching ? '···' : '▶'}}</text>
+          <text class="launch-text txt">{{launched ? t.home_launched : launching ? t.home_launching : t.home_launch}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="home-footer">
+      <text class="footer-text txt">{{t.home_hint}}</text>
+    </view>
+  </view>
+
+</view>

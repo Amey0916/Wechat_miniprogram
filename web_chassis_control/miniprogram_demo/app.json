@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/settings/settings",
+    "pages/maplist/maplist",
+    "pages/scanintro/scanintro",
+    "pages/scanning/scanning",
+    "pages/smartctrl/smartctrl",
+    "pages/chassis/chassis"
+  ],
+  "window": {
+    "navigationBarTitleText": "智慧移动垃圾桶",
+    "navigationBarBackgroundColor": "#050d1a",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#050d1a"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

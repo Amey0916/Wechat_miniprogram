@@ -1,0 +1,64 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}}">
+  <view class="header">
+    <text class="header-title txt">{{t.smart_title}}</text>
+    <view class="header-settings" bindtap="goSettings">⚙️</view>
+  </view>
+  <view class="rviz-wrap {{fullscreen ? 'rviz-full' : ''}}" wx:if="{{rvizVisible}}">
+    <view class="rviz-placeholder">
+      <text class="rviz-icon">🗺️</text>
+      <text class="rviz-hint txt">{{t.smart_nav_hint}}</text>
+    </view>
+    <view class="fullscreen-btn" bindtap="toggleFullscreen"><text>{{fullscreen ? '⊡' : '⛶'}}</text></view>
+    <view class="estop-btn {{unlocked ? 'estop-unlocked' : 'estop-locked'}}" bindtap="toggleUnlock">
+      <text class="estop-text txt">{{unlocked ? t.scan_unlock : t.scan_locked}}</text>
+    </view>
+  </view>
+  <view class="ctrl-cards">
+    <view class="ctrl-card {{navActive ? 'ctrl-card-active' : ''}}" bindtap="toggleNav">
+      <view class="ctrl-card-left">
+        <text class="ctrl-icon">🧭</text>
+        <view class="ctrl-texts">
+          <text class="ctrl-name txt">{{t.smart_nav_name}}</text>
+          <text class="ctrl-desc txt">{{navActive ? t.smart_nav_desc_on : t.smart_nav_desc_off}}</text>
+        </view>
+      </view>
+      <view class="ctrl-toggle {{navActive ? 'toggle-on' : 'toggle-off'}}">
+        <text class="toggle-label txt">{{navActive ? 'ON' : 'OFF'}}</text>
+      </view>
+    </view>
+    <view class="ctrl-card {{followActive ? 'ctrl-card-active' : ''}}" bindtap="toggleFollow">
+      <view class="ctrl-card-left">
+        <text class="ctrl-icon">🚶</text>
+        <view class="ctrl-texts">
+          <text class="ctrl-name txt">{{followActive ? t.smart_follow_on : t.smart_follow_off}}</text>
+          <text class="ctrl-desc txt">{{followActive ? t.smart_follow_desc_on : t.smart_follow_desc_off}}</text>
+        </view>
+      </view>
+      <view class="ctrl-toggle {{followActive ? 'toggle-on' : 'toggle-off'}}">
+        <text class="toggle-label txt">{{followActive ? 'ON' : 'OFF'}}</text>
+      </view>
+    </view>
+    <view class="ctrl-card" bindtap="goChassis">
+      <view class="ctrl-card-left">
+        <text class="ctrl-icon">🎮</text>
+        <view class="ctrl-texts">
+          <text class="ctrl-name txt">{{t.smart_chassis}}</text>
+          <text class="ctrl-desc txt">{{t.smart_chassis_desc}}</text>
+        </view>
+      </view>
+      <text class="ctrl-chevron">›</text>
+    </view>
+    <view class="ctrl-card estop-card {{unlocked ? 'estop-card-on' : 'estop-card-off'}}" bindtap="toggleUnlock" wx:if="{{!rvizVisible}}">
+      <view class="ctrl-card-left">
+        <text class="ctrl-icon">{{unlocked ? '🔓' : '🔒'}}</text>
+        <view class="ctrl-texts">
+          <text class="ctrl-name txt">{{unlocked ? t.smart_estop_on : t.smart_estop_off}}</text>
+          <text class="ctrl-desc txt">{{unlocked ? t.smart_estop_desc_on : t.smart_estop_desc_off}}</text>
+        </view>
+      </view>
+      <view class="ctrl-toggle {{unlocked ? 'toggle-on' : 'toggle-off'}}">
+        <text class="toggle-label txt">{{unlocked ? 'ON' : 'OFF'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

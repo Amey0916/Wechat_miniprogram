@@ -1,0 +1,70 @@
+@import '../../app.wxss';
+
+.section-label {
+  font-size: 24rpx;
+  color: var(--text2);
+  letter-spacing: 2rpx;
+  margin-bottom: 28rpx;
+  display: block;
+}
+
+.option-row {
+  display: flex;
+  gap: 20rpx;
+}
+.option-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 32rpx 16rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.option-btn:active { background: var(--card-hover); }
+.option-active {
+  border-color: var(--accent) !important;
+  background: rgba(0,229,255,0.08) !important;
+  box-shadow: 0 0 20rpx rgba(0,229,255,0.15);
+}
+.option-icon { font-size: 44rpx; }
+.option-text {
+  font-size: 26rpx;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.option-col { display: flex; flex-direction: column; gap: 16rpx; }
+.option-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 24rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid var(--border);
+  cursor: pointer;
+}
+.option-row-item:active { background: var(--card-hover); }
+.option-row-item.option-active { border-color: var(--accent); background: rgba(0,229,255,0.08); }
+.check-dot { width: 20rpx; height: 20rpx; }
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  width: 100%;
+  padding: 36rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  margin-top: 16rpx;
+}
+.back-btn:active { background: var(--card-hover); }
+.back-icon { font-size: 36rpx; color: var(--accent); }
+.back-text { font-size: 30rpx; font-weight: 600; color: var(--text); letter-spacing: 2rpx; }

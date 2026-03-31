@@ -1,0 +1,24 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}}">
+  <view class="header">
+    <text class="header-title txt">{{t.intro_title}}</text>
+    <view class="header-settings" bindtap="goSettings">⚙️</view>
+  </view>
+  <view class="intro-banner">
+    <text class="banner-icon">🗺️</text>
+    <text class="banner-title txt">{{t.intro_banner}}</text>
+  </view>
+  <view class="card instructions-card">
+    <view wx:for="{{instructions}}" wx:key="no" class="instruction-item">
+      <view class="step-badge"><text class="step-no">{{item.no}}</text></view>
+      <text class="step-text txt">{{item.text}}</text>
+    </view>
+  </view>
+  <view class="warn-box">
+    <text class="warn-icon">⚠️</text>
+    <text class="warn-text txt">{{t.intro_warn}}</text>
+  </view>
+  <view class="start-btn" bindtap="onStart">
+    <text class="start-icon">▶</text>
+    <text class="start-text txt">{{t.intro_start}}</text>
+  </view>
+</view>

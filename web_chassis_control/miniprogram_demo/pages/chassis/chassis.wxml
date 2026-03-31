@@ -1,0 +1,84 @@
+<view class="page {{theme === 'light' ? 'theme-light' : ''}} {{fontSize === 'large' ? 'sz-large' : ''}}">
+
+  <view class="header">
+    <text class="header-title txt">{{t.chassis_title}}</text>
+    <view class="header-dot {{unlocked ? 'dot-on' : 'dot-off'}}"></view>
+    <text class="header-status txt">{{unlocked ? 'UNLOCKED' : 'LOCKED'}}</text>
+    <view class="header-settings" bindtap="goSettings">⚙️</view>
+  </view>
+
+  <view class="card unlock-card" bindtap="toggleUnlock">
+    <view class="unlock-icon-wrap">
+      <text class="unlock-icon">{{unlocked ? '🔓' : '🔒'}}</text>
+    </view>
+    <view class="unlock-text-wrap">
+      <text class="unlock-label txt">{{unlocked ? t.chassis_unlocked : t.chassis_locked}}</text>
+      <text class="unlock-hint txt">{{unlocked ? t.chassis_unlock_hint_on : t.chassis_unlock_hint_off}}</text>
+    </view>
+    <view class="unlock-pill {{unlocked ? 'pill-on' : 'pill-off'}}">
+      <text class="pill-text txt">{{unlocked ? 'ON' : 'OFF'}}</text>
+    </view>
+  </view>
+
+  <view class="card speed-card">
+    <view class="speed-header">
+      <text class="speed-label txt">{{t.chassis_speed_label}}</text>
+      <view class="speed-val-box">
+        <text class="speed-val">{{speed}}</text>
+        <text class="speed-unit txt">m/s</text>
+      </view>
+    </view>
+    <view class="slider-track-wrap">
+      <text class="slider-min txt">0.1</text>
+      <slider class="speed-slider" min="0" max="100" value="{{speedPct}}"
+        activeColor="#00e5ff" backgroundColor="rgba(255,255,255,0.12)"
+        block-color="#ffffff" block-size="22"
+        bindchange="onSpeedChange" binddragging="onSpeedChange"/>
+      <text class="slider-max txt">0.5</text>
+    </view>
+  </view>
+
+  <view class="dpad-wrap">
+    <view class="dpad-row">
+      <view class="dpad-btn dpad-up {{_activeDir === 'up' ? 'dpad-btn-pressed' : ''}}" data-dir="up"
+        catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+        bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave" bindtap="onDirTap">
+        <text class="dpad-arrow">▲</text>
+      </view>
+    </view>
+    <view class="dpad-row">
+      <view class="dpad-btn dpad-left {{_activeDir === 'left' ? 'dpad-btn-pressed' : ''}}" data-dir="left"
+        catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+        bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave" bindtap="onDirTap">
+        <text class="dpad-arrow">◀</text>
+      </view>
+      <view class="dpad-center"><view class="dpad-center-ring"></view></view>
+      <view class="dpad-btn dpad-right {{_activeDir === 'right' ? 'dpad-btn-pressed' : ''}}" data-dir="right"
+        catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+        bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave" bindtap="onDirTap">
+        <text class="dpad-arrow">▶</text>
+      </view>
+    </view>
+    <view class="dpad-row">
+      <view class="dpad-btn dpad-down {{_activeDir === 'down' ? 'dpad-btn-pressed' : ''}}" data-dir="down"
+        catchtouchstart="onDirTouchStart" catchtouchend="onDirTouchEnd" catchtouchcancel="onDirTouchEnd"
+        bindmousedown="onDirMouseDown" bindmouseup="onDirMouseUp" bindmouseleave="onDirMouseLeave" bindtap="onDirTap">
+        <text class="dpad-arrow">▼</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已删除鸣笛，只保留灯光：图标左 文字右 -->
+  <view class="func-row">
+    <view class="func-btn {{lampOn ? 'func-btn-active' : ''}}" bindtap="lamp">
+      <text class="func-icon">💡</text>
+      <text class="func-label txt">{{lampOn ? t.chassis_lamp_on : t.chassis_lamp_off}}</text>
+    </view>
+  </view>
+
+  <view class="back-row" bindtap="goBack">
+    <text class="back-icon">←</text>
+    <text class="back-text txt">{{t.chassis_back}}</text>
+  </view>
+
+</view>

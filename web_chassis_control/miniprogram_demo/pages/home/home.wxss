@@ -1,0 +1,144 @@
+@import '../../app.wxss';
+
+.page {
+  position: relative;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* 右上角设置 */
+.settings-entry {
+  position: fixed;
+  top: 48rpx;
+  right: 32rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: pointer;
+}
+.settings-icon { font-size: 40rpx; }
+
+/* 主体 */
+.home-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+
+/* 艺术字 */
+.brand-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 96rpx;
+}
+.brand-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600rpx;
+  height: 600rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.brand-sub {
+  font-size: 22rpx;
+  letter-spacing: 8rpx;
+  color: var(--accent);
+  margin-bottom: 16rpx;
+  opacity: 0.7;
+}
+.brand-title {
+  font-size: 96rpx;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: 8rpx;
+  text-shadow: 0 0 60rpx rgba(0,229,255,0.3);
+}
+.brand-title2 {
+  color: var(--accent);
+  text-shadow: 0 0 40rpx rgba(0,229,255,0.6);
+}
+.brand-line {
+  width: 120rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 24rpx 0;
+}
+.brand-tagline {
+  font-size: 24rpx;
+  letter-spacing: 6rpx;
+  color: var(--text2);
+}
+
+/* 启动按钮 */
+.launch-btn-wrap {
+  width: 100%;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  margin-bottom: 64rpx;
+}
+.launch-btn {
+  position: relative;
+  width: 100%;
+  border-radius: 24rpx;
+  overflow: hidden;
+  cursor: pointer;
+}
+.launch-btn:active .launch-btn-inner { opacity: 0.85; }
+.launch-btn-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 24rpx;
+  border: 2rpx solid var(--accent);
+  box-shadow: 0 0 40rpx rgba(0,229,255,0.25), inset 0 0 40rpx rgba(0,229,255,0.05);
+  pointer-events: none;
+}
+.launch-btn-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  padding: 64rpx 40rpx;
+  background: linear-gradient(135deg, rgba(0,119,255,0.15), rgba(0,229,255,0.08));
+}
+.launching .launch-btn-inner {
+  background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(0,119,255,0.05));
+}
+.launch-icon {
+  font-size: 72rpx;
+  color: var(--accent);
+  text-shadow: 0 0 24rpx var(--accent);
+}
+.launch-text {
+  font-size: 36rpx;
+  font-weight: 700;
+  letter-spacing: 6rpx;
+  color: var(--text);
+}
+
+/* 底部提示 */
+.home-footer {
+  padding: 0 32rpx;
+}
+.footer-text {
+  font-size: 22rpx;
+  color: var(--text3);
+  text-align: center;
+  letter-spacing: 1rpx;
+}

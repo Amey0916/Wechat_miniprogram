@@ -1,0 +1,153 @@
+@import '../../app.wxss';
+
+.header {
+  justify-content: space-between;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.header-btn {
+  padding: 12rpx 28rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid var(--border);
+  font-size: 26rpx;
+  color: var(--text);
+  cursor: pointer;
+}
+.header-btn-active { border-color: var(--accent); color: var(--accent); }
+.header-settings {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  cursor: pointer;
+}
+
+/* 地图网格 */
+.map-grid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+}
+.map-item {
+  width: calc(50% - 12rpx);
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+.map-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 16rpx;
+  border: 1rpx solid var(--border);
+  background: var(--card);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.map-img { width: 100%; height: 100%; }
+.map-placeholder { display: flex; align-items: center; justify-content: center; }
+.map-placeholder-icon { font-size: 72rpx; opacity: 0.4; }
+
+.map-add-thumb {
+  border-style: dashed;
+  border-color: var(--accent);
+  background: rgba(0,229,255,0.04);
+}
+.map-add-icon {
+  font-size: 80rpx;
+  color: var(--accent);
+  line-height: 1;
+  text-shadow: 0 0 20rpx rgba(0,229,255,0.5);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 700;
+}
+
+.map-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 4rpx 8rpx;
+}
+.map-name {
+  font-size: 26rpx;
+  color: var(--text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.edit-icon { font-size: 24rpx; opacity: 0.5; }
+
+/* 弹窗 */
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal-box {
+  width: 80%;
+  background: var(--bg2);
+  border: 1rpx solid var(--border);
+  border-radius: 24rpx;
+  padding: 48rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+.modal-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+.modal-input {
+  width: 100%;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.modal-btns { display: flex; gap: 20rpx; }
+.modal-btn {
+  flex: 1;
+  padding: 28rpx;
+  border-radius: 12rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  cursor: pointer;
+}
+.modal-cancel { border: 1rpx solid var(--border); color: var(--text2); }
+.modal-confirm { background: linear-gradient(135deg, var(--accent2), var(--accent)); color: #fff; }

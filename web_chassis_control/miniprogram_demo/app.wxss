@@ -1,0 +1,177 @@
+/* ================================================================
+   全局 CSS 变量 — 黑暗主题（默认）
+   后续页面通过 .theme-light 类覆盖变量实现明亮主题
+   ================================================================ */
+page {
+  /* 黑暗主题色板 */
+  --bg:          #050d1a;
+  --bg2:         #0a1628;
+  --card:        rgba(255,255,255,0.05);
+  --card-hover:  rgba(0,229,255,0.10);
+  --border:      rgba(0,229,255,0.18);
+  --accent:      #00e5ff;
+  --accent2:     #0077ff;
+  --text:        #e8f4ff;
+  --text2:       #7a9bbf;
+  --text3:       #3d5a7a;
+  --red:         #ff3b5c;
+  --green:       #00e676;
+  --yellow:      #ffd600;
+
+  background: var(--bg);
+  background-image:
+    linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+  background-size: 48rpx 48rpx;
+  font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+/* 明亮主题覆盖 */
+.theme-light {
+  --bg:          #f0f4fa;
+  --bg2:         #ffffff;
+  --card:        rgba(255,255,255,0.85);
+  --card-hover:  rgba(0,119,255,0.08);
+  --border:      rgba(0,119,255,0.20);
+  --accent:      #0077ff;
+  --accent2:     #00b4d8;
+  --text:        #0d1f3c;
+  --text2:       #4a6080;
+  --text3:       #a0b4cc;
+  --red:         #e8002d;
+  --green:       #00b140;
+  --yellow:      #f5a623;
+  background: var(--bg);
+  background-image:
+    linear-gradient(rgba(0,119,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,119,255,0.04) 1px, transparent 1px);
+  background-size: 48rpx 48rpx;
+}
+
+/* 字体放大：.sz-large 下所有 .txt 类文字统一放大 */
+.sz-large .txt,
+.sz-large .header-title,
+.sz-large .section-label,
+.sz-large .option-text,
+.sz-large .unlock-label,
+.sz-large .unlock-hint,
+.sz-large .speed-label,
+.sz-large .speed-val,
+.sz-large .func-label,
+.sz-large .back-text,
+.sz-large .ctrl-name,
+.sz-large .ctrl-desc,
+.sz-large .step-text,
+.sz-large .warn-text,
+.sz-large .map-name,
+.sz-large .modal-title,
+.sz-large .modal-hint,
+.sz-large .modal-warn-text,
+.sz-large .brand-title,
+.sz-large .brand-tagline,
+.sz-large .launch-text,
+.sz-large .footer-text,
+.sz-large .side-label,
+.sz-large .bottom-btn,
+.sz-large .start-text,
+.sz-large .header-status,
+.sz-large .toggle-label {
+  font-size: 1.22em !important;
+  line-height: 1.5 !important;
+}
+
+/* ── 通用卡片 ── */
+.card {
+  width: 100%;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  border-radius: 24rpx;
+  padding: 36rpx;
+  box-sizing: border-box;
+  margin-bottom: 28rpx;
+}
+
+/* ── 通用页面容器 ── */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 32rpx 80rpx;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+/* ── 顶部标题栏 ── */
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 44rpx;
+  gap: 16rpx;
+}
+.header-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  color: var(--text);
+  flex: 1;
+}
+.header-settings {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1rpx solid var(--border);
+  cursor: pointer;
+}
+
+/* ── 通用主按钮 ── */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 36rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0,229,255,0.25);
+  cursor: pointer;
+}
+.btn-primary:active { opacity: 0.85; }
+
+/* ── 通用次按钮 ── */
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28rpx 48rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 28rpx;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-ghost:active { background: var(--card-hover); }
+
+/* ── 状态指示灯 ── */
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-on  { background: var(--green); box-shadow: 0 0 14rpx var(--green); }
+.dot-off { background: var(--red);   box-shadow: 0 0 14rpx var(--red);   }
+.dot-warn{ background: var(--yellow);box-shadow: 0 0 14rpx var(--yellow);}
