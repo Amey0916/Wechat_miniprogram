@@ -47,12 +47,13 @@ Page({
           try {
             const resp = JSON.parse(msg.data || '{}')
             if (resp.ok) finish(true, resp)
-            else finish(false, new Error(resp.error || '后端执行失败'))
+            else finish(false, new Error(resp.error || `后端执行失败: ${data.type || 'unknown'}`))
           } catch (_) {
-            finish(true, {})
+            const raw = String(msg?.data || '').slice(0, 80)
+            finish(false, new Error(`后端返回格式异常: ${raw}`))
           }
         })
-        s.onError((err) => finish(false, new Error(err?.errMsg || '连接失败')))
+        s.onError((err) => finish(false, new Error(err?.errMsg || `连接失败: ${app.globalData.serverWsUrl}`)))
       } catch (e) {
         reject(e)
       }
@@ -81,7 +82,7 @@ Page({
       } catch (e) {
         this.setData({ followActive: false })
         wx.showToast({
-          title: `开启失败：${e.message || '请检查工控机依赖'}`,
+          title: `开启失败：${e.message || '连接或执行失败'}`,
           icon: 'none',
           duration: 2800
         })
